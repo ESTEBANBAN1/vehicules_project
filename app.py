@@ -22,7 +22,7 @@ if hist_button: # al hacer clic en el botón
 
 # Gráfico de dispersión
 st.subheader('Gráfico de Dispersión: Precio vs. Año')
-fig_scatter = px.scatter(car_data, x='year', y='price')
+fig_scatter = px.scatter(car_data, x='model_year', y='price')
 st.plotly_chart(fig_scatter, use_container_width=True)
 
 # Casilla de verificación
