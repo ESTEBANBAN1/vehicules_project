@@ -32,12 +32,12 @@ st.header('Gráfico de Dispersión Interactivo')
 button_change_style = st.button('Cambiar Estilo del Gráfico')
 
 # Gráfico de dispersión inicial
-fig_scatter = px.scatter(data, x='X', y='Y', title='Gráfico de Dispersión')
+fig_scatter = px.scatter(data, x='model_year', y='price', title='Gráfico de Dispersión')
 st.plotly_chart(fig_scatter, use_container_width=True)
 
 # Sección condicional basada en el botón
 if button_change_style:
     # Cambiar el estilo del gráfico a línea si el botón se presiona
-    fig_line = px.line(data, x='X', y='Y', title='Gráfico de Línea')
+    fig_line = px.line(data, x='model_year', y='price', title='Gráfico de Línea')
     st.plotly_chart(fig_line, use_container_width=True)
     
