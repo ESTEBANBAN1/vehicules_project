@@ -1,27 +1,32 @@
-import pandas as pd 
+import pandas as pd
 import plotly.express as px
 import streamlit as st
+import numpy as np
 
-car_data = pd.read_csv('vehicles_us.csv') # leer los datos
 
-# Encabezado con texto
-st.header('Análisis de Datos de Vehículos en Estados Unidos')
 
-hist_button = st.button('Construir histograma') # crear un botón
-        
-if hist_button: # al hacer clic en el botón
-    
-    # escribir un mensaje
-    st.write('Creación de un histograma para el conjunto de datos de anuncios de venta de coches')
-            
-    # crear un histograma
-    fig = px.histogram(car_data, x="odometer")
-        
-    # mostrar un gráfico Plotly interactivo
+st.header('Conjunto de datos de anuncios de venta de coches') # Encabezado
+
+car_data = pd.read_csv('vehicles_us.csv') # Leer el dataframe vehicles_us
+hist_checkbox = st.checkbox('Construir histograma.') # Checkbox para el histograma
+scatter_checkbox = st.checkbox('Construir gráfico de dispersión.') # Checkbox para el gráfico de dispersión
+
+if hist_checkbox: # Al hacer click en el checkbox del histograma
+    # Escribir un mensaje
+    st.write('Creación de un histograma para el conjunto de datos de anuncios de venta de coches.')
+
+    # Creación de un histogrma
+    fig = px.histogram(car_data, x='odometer')
+
+    # Mostrar el histograma Plotly interactivo
     st.plotly_chart(fig, use_container_width=True)
 
-# Gráfico de dispersión
-st.subheader('Gráfico de Dispersión: Precio vs. Año')
-fig_scatter = px.scatter(car_data, x='model_year', y='price')
-st.plotly_chart(fig_scatter, use_container_width=True)
-    
+if scatter_checkbox: # Al hacer click en el checkbox del gráfico de dispersión
+    # Escribir un mensaje
+    st.write('Creación de un gráfico de dispersión para datos de anuncios de venta de coches.')
+
+    # Crea un gráfico de dispersión
+    fig = px.scatter(car_data, x='odometer', y='price')
+
+    # Mostrar el gráfico de dispersión Plotly interactivo
+    st.plotly_chart(fig, use_container_width=True)
