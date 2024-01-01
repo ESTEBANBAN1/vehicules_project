@@ -25,24 +25,19 @@ st.subheader('Gráfico de Dispersión: Precio vs. Año')
 fig_scatter = px.scatter(car_data, x='model_year', y='price')
 st.plotly_chart(fig_scatter, use_container_width=True)
 
-# Casilla de verificación
-checkbox = st.checkbox('Mostrar Detalles Adicionales')
-if checkbox:
-    # Contenido adicional cuando la casilla está marcada
-    st.write('Detalles adicionales...')
+# Encabezado con texto
+st.header('Gráfico de Dispersión Interactivo')
 
-filter_button = st.button('Filtrar Datos')
-if filter_button:
-    # Lógica de filtrado
-    min_year = st.slider('Año Mínimo', int(car_data['model_year'].min()), int(car_data['model_year'].max()), int(car_data['model_year'].min()))
-    max_year = st.slider('Año Máximo', min_year, int(car_data['model_year'].max()), int(car_data['model_year'].max()))
+# Botón para cambiar el estilo del gráfico
+button_change_style = st.button('Cambiar Estilo del Gráfico')
 
-    min_price = st.slider('Precio Mínimo', int(car_data['price'].min()), int(car_data['price'].max()), int(car_data['price'].min()))
-    max_price = st.slider('Precio Máximo', min_price, int(car_data['price'].max()), int(car_data['price'].max()))
+# Gráfico de dispersión inicial
+fig_scatter = px.scatter(data, x='X', y='Y', title='Gráfico de Dispersión')
+st.plotly_chart(fig_scatter, use_container_width=True)
 
-    filtered_data = car_data[(car_data['model_year'] >= min_year) & (car_data['model_year'] <= max_year) & (car_data['price'] >= min_price) & (car_data['price'] <= max_price)]
-
-    # Mostrar datos filtrados
-    st.subheader('Datos Filtrados')
-    st.write(filtered_data)
+# Sección condicional basada en el botón
+if button_change_style:
+    # Cambiar el estilo del gráfico a línea si el botón se presiona
+    fig_line = px.line(data, x='X', y='Y', title='Gráfico de Línea')
+    st.plotly_chart(fig_line, use_container_width=True)
     
