@@ -31,16 +31,18 @@ if checkbox:
     # Contenido adicional cuando la casilla está marcada
     st.write('Detalles adicionales...')
 
-# Otro botón (puedes cambiar a casilla de verificación según tus necesidades)
-button_2 = st.button('Otro Botón')
-if button_2:
-    st.write('Haz clic en el segundo botón')
+filter_button = st.button('Filtrar Datos')
+if filter_button:
+    # Lógica de filtrado
+    min_year = st.slider('Año Mínimo', int(car_data['model_year'].min()), int(car_data['model_year'].max()), int(car_data['model_year'].min()))
+    max_year = st.slider('Año Máximo', min_year, int(car_data['model_year'].max()), int(car_data['model_year'].max()))
 
-# Puedes agregar más visualizaciones, botones, casillas de verificación, etc.
+    min_price = st.slider('Precio Mínimo', int(car_data['price'].min()), int(car_data['price'].max()), int(car_data['price'].min()))
+    max_price = st.slider('Precio Máximo', min_price, int(car_data['price'].max()), int(car_data['price'].max()))
 
-# Asegúrate de que haya contenido en general
-if not (hist_button or checkbox or button_2):
-    st.warning('No se ha seleccionado ninguna opción. Seleccione al menos una para visualizar.')
+    filtered_data = car_data[(car_data['model_year'] >= min_year) & (car_data['model_year'] <= max_year) & (car_data['price'] >= min_price) & (car_data['price'] <= max_price)]
 
-# Asegúrate de cerrar la aplicación de Streamlit
-st.balloons()
+    # Mostrar datos filtrados
+    st.subheader('Datos Filtrados')
+    st.write(filtered_data)
+    
